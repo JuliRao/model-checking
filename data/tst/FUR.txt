@@ -1,0 +1,523 @@
+MODULE SunDetector_1
+VAR
+	state: {Day, Moon};
+	t: 0..720;
+	sunset_t: boolean;
+	sunrise_t: boolean;
+ASSIGN
+	init(state) := Day;
+	init(t) := 360;
+	init(sunset_t) := FALSE;
+	init(sunrise_t) := FALSE;
+
+MODULE Smoke_Detector_2
+VAR
+	state: {LOW, HIGH};
+	smoke_level: 0..50;
+	level_down_a: boolean;
+ASSIGN
+	init(state) := LOW;
+	init(smoke_level) := 0;
+	init(level_down_a) := FALSE;
+
+MODULE Rain_Detector_3
+VAR
+	state: {NoRain, Raining};
+	find_rain_t: boolean;
+	rain_stop_t: boolean;
+ASSIGN
+	init(state) := Raining;
+	init(find_rain_t) := FALSE;
+	init(rain_stop_t) := FALSE;
+
+MODULE Outside_Light_Detector_4
+VAR
+	state: {Working};
+	light: 0..40;
+ASSIGN
+	init(light) := 10;
+
+MODULE Window_5
+VAR
+	state: {Opened, Closed};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := Closed;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE Window_6
+VAR
+	state: {Opened, Closed};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := Closed;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE Window_7
+VAR
+	state: {Opened, Closed};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := Closed;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE AC_Cooler_8
+VAR
+	state: {OFF, Working};
+	temperature: -5..40;
+	activate_a: boolean;
+	pause_a: boolean;
+ASSIGN
+	init(state) := OFF;
+	init(temperature) := 25;
+	init(activate_a) := FALSE;
+	init(pause_a) := FALSE;
+
+MODULE Alarm_9
+VAR
+	state: {ON, OFF};
+	turn_on_a: boolean;
+	turn_off_a: boolean;
+ASSIGN
+	init(state) := OFF;
+	init(turn_on_a) := FALSE;
+	init(turn_off_a) := FALSE;
+
+MODULE TV_10
+VAR
+	state: {Opened, Closed};
+	close_a: boolean;
+	open_a: boolean;
+ASSIGN
+	init(state) := Closed;
+	init(close_a) := FALSE;
+	init(open_a) := FALSE;
+
+MODULE Door_11
+VAR
+	state: {Opened, Closed};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := Closed;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE Light_12
+VAR
+	state: {ON, OFF};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := OFF;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE Light_13
+VAR
+	state: {ON, OFF};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := OFF;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE Light_14
+VAR
+	state: {ON, OFF};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := OFF;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE Light_15
+VAR
+	state: {ON, OFF};
+	open_a: boolean;
+	close_a: boolean;
+ASSIGN
+	init(state) := OFF;
+	init(open_a) := FALSE;
+	init(close_a) := FALSE;
+
+MODULE Human_Detector_16
+VAR
+	state: {NoHuman, BeHuman};
+	human_out_t: boolean;
+	human_in_t: boolean;
+ASSIGN
+	init(state) := NoHuman;
+	init(human_out_t) := FALSE;
+	init(human_in_t) := FALSE;
+
+MODULE Human_Detector_17
+VAR
+	state: {NoHuman, BeHuman};
+	human_out_t: boolean;
+	human_in_t: boolean;
+ASSIGN
+	init(state) := NoHuman;
+	init(human_out_t) := FALSE;
+	init(human_in_t) := FALSE;
+
+MODULE Human_Detector_18
+VAR
+	state: {NoHuman, BeHuman};
+	human_out_t: boolean;
+	human_in_t: boolean;
+ASSIGN
+	init(state) := NoHuman;
+	init(human_out_t) := FALSE;
+	init(human_in_t) := FALSE;
+
+MODULE Human_Detector_19
+VAR
+	state: {NoHuman, BeHuman};
+	human_out_t: boolean;
+	human_in_t: boolean;
+ASSIGN
+	init(state) := NoHuman;
+	init(human_out_t) := FALSE;
+	init(human_in_t) := FALSE;
+
+MODULE main
+VAR
+	_1: SunDetector_1;
+	_2: Smoke_Detector_2;
+	_3: Rain_Detector_3;
+	_4: Outside_Light_Detector_4;
+	_5: Window_5;
+	_6: Window_6;
+	_7: Window_7;
+	_8: AC_Cooler_8;
+	_9: Alarm_9;
+	_10: TV_10;
+	_11: Door_11;
+	_12: Light_12;
+	_13: Light_13;
+	_14: Light_14;
+	_15: Light_15;
+	_16: Human_Detector_16;
+	_17: Human_Detector_17;
+	_18: Human_Detector_18;
+	_19: Human_Detector_19;
+
+ASSIGN
+	next(_1.state):=
+	case
+		_1.state=Day & _1.t=0: Moon;
+		_1.state=Moon & _1.t=720: Day;
+		TRUE: _1.state;
+	esac;
+
+	next(_2.state):=
+	case
+		_2.state=LOW & _2.smoke_level=19: HIGH;
+		TRUE: _2.state;
+	esac;
+
+	next(_3.state):=
+	case
+		_3.state=NoRain: Raining;
+		_3.state=Raining: NoRain;
+		TRUE: _3.state;
+	esac;
+
+	next(_6.state):=
+	case
+		_6.state=Opened & _3.find_rain_t=TRUE: Closed;
+		TRUE: _6.state;
+	esac;
+
+	next(_8.state):=
+	case
+		_8.state=OFF & _8.temperature>30: Working;
+		TRUE: _8.state;
+	esac;
+
+	next(_16.state):=
+	case
+		_16.state=BeHuman: NoHuman;
+		_16.state=NoHuman: BeHuman;
+		TRUE: _16.state;
+	esac;
+
+	next(_17.state):=
+	case
+		_17.state=BeHuman: NoHuman;
+		_17.state=NoHuman: BeHuman;
+		TRUE: _17.state;
+	esac;
+
+	next(_18.state):=
+	case
+		_18.state=BeHuman: NoHuman;
+		_18.state=NoHuman: BeHuman;
+		TRUE: _18.state;
+	esac;
+
+	next(_19.state):=
+	case
+		_19.state=BeHuman: NoHuman;
+		_19.state=NoHuman: BeHuman;
+		TRUE: _19.state;
+	esac;
+
+	next(_1.t):=
+	case
+		_1.state=Day & _1.t=0: 0;
+		_1.state=Moon & _1.t=720: 720;
+		_1.t=720: {toint(_1.t), toint(_1.t)-1};
+		_1.t=0: {toint(_1.t), toint(_1.t)+1};
+		_1.state = Day: toint(_1.t)-1;
+		_1.state = Moon: toint(_1.t)+1;
+		TRUE: _1.t;
+	esac;
+
+	next(_2.smoke_level):=
+	case
+		_2.smoke_level=50: {toint(_2.smoke_level), toint(_2.smoke_level)-1};
+		_2.smoke_level=0: {toint(_2.smoke_level), toint(_2.smoke_level)+1};
+		_2.state = LOW: {toint(_2.smoke_level)-1, toint(_2.smoke_level), toint(_2.smoke_level)+1};
+		_2.state = HIGH: toint(_2.smoke_level)-1;
+		TRUE: _2.smoke_level;
+	esac;
+
+	next(_4.light):=
+	case
+		_4.light=40: {toint(_4.light), toint(_4.light)-1};
+		_4.light=0: {toint(_4.light), toint(_4.light)+1};
+		_4.state = Working: {toint(_4.light)-1, toint(_4.light), toint(_4.light)+1};
+		TRUE: _4.light;
+	esac;
+
+	next(_8.temperature):=
+	case
+		_8.temperature=40: {toint(_8.temperature), toint(_8.temperature)-1};
+		_8.temperature=-5: {toint(_8.temperature), toint(_8.temperature)+1};
+		_8.state = OFF: {toint(_8.temperature)-1, toint(_8.temperature), toint(_8.temperature)+1};
+		_8.state = Working: toint(_8.temperature)-1;
+		TRUE: _8.temperature;
+	esac;
+
+	next(_1.sunset_t):=
+	case
+		_1.state=Day & next(_1.state)=Moon: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_1.sunrise_t):=
+	case
+		_1.state=Moon & next(_1.state)=Day: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_2.level_down_a):=
+	case
+		_2.state=LOW & next(_2.state)=HIGH: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_3.find_rain_t):=
+	case
+		_3.state=NoRain & next(_3.state)=Raining: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_3.rain_stop_t):=
+	case
+		_3.state=Raining & next(_3.state)=NoRain: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_5.open_a):=
+	case
+		_5.state=Closed & next(_5.state)=Opened: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_5.close_a):=
+	case
+		_5.state=Opened & next(_5.state)=Closed: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_6.open_a):=
+	case
+		_6.state=Closed & next(_6.state)=Opened: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_6.close_a):=
+	case
+		_6.state=Opened & next(_6.state)=Closed: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_7.open_a):=
+	case
+		_7.state=Closed & next(_7.state)=Opened: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_7.close_a):=
+	case
+		_7.state=Opened & next(_7.state)=Closed: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_8.activate_a):=
+	case
+		_8.state=OFF & next(_8.state)=Working: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_8.pause_a):=
+	case
+		_8.state=Working & next(_8.state)=OFF: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_9.turn_on_a):=
+	case
+		_9.state=OFF & next(_9.state)=ON: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_9.turn_off_a):=
+	case
+		_9.state=ON & next(_9.state)=OFF: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_10.close_a):=
+	case
+		_10.state=Opened & next(_10.state)=Closed: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_10.open_a):=
+	case
+		_10.state=Closed & next(_10.state)=Opened: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_11.open_a):=
+	case
+		_11.state=Closed & next(_11.state)=Opened: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_11.close_a):=
+	case
+		_11.state=Opened & next(_11.state)=Closed: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_12.open_a):=
+	case
+		_12.state=OFF & next(_12.state)=ON: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_12.close_a):=
+	case
+		_12.state=ON & next(_12.state)=OFF: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_13.open_a):=
+	case
+		_13.state=OFF & next(_13.state)=ON: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_13.close_a):=
+	case
+		_13.state=ON & next(_13.state)=OFF: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_14.open_a):=
+	case
+		_14.state=OFF & next(_14.state)=ON: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_14.close_a):=
+	case
+		_14.state=ON & next(_14.state)=OFF: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_15.open_a):=
+	case
+		_15.state=OFF & next(_15.state)=ON: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_15.close_a):=
+	case
+		_15.state=ON & next(_15.state)=OFF: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_16.human_out_t):=
+	case
+		_16.state=BeHuman & next(_16.state)=NoHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_16.human_in_t):=
+	case
+		_16.state=NoHuman & next(_16.state)=BeHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_17.human_out_t):=
+	case
+		_17.state=BeHuman & next(_17.state)=NoHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_17.human_in_t):=
+	case
+		_17.state=NoHuman & next(_17.state)=BeHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_18.human_out_t):=
+	case
+		_18.state=BeHuman & next(_18.state)=NoHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_18.human_in_t):=
+	case
+		_18.state=NoHuman & next(_18.state)=BeHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_19.human_out_t):=
+	case
+		_19.state=BeHuman & next(_19.state)=NoHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+	next(_19.human_in_t):=
+	case
+		_19.state=NoHuman & next(_19.state)=BeHuman: TRUE;
+		TRUE: FALSE;
+	esac;
+
+CTLSPEC AG(_2.smoke_level<20);
+CTLSPEC AG(_8.temperature<30);
