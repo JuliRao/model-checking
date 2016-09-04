@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import Common.Info;
 import Common.LhaSpec;
-
+//这不是洗澡改的
 public class ChangeInfo {	
 	private static int SN_num = 0;
 	private static Boolean Debug = false;
